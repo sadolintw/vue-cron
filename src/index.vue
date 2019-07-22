@@ -35,7 +35,7 @@
 </style>
 <template>
     <div id="changeContab">
-        <el-button class="language" type="text" @click="i18n=(i18n==='en'?'cn':'en')">{{i18n}}</el-button>
+        <el-button class="language" type="text" @click="i18n=(i18n==='en'?'zh_TW':'en')">{{i18n}}</el-button>
         <el-tabs type="border-card">
             <el-tab-pane>
                 <span slot="label"><i class="el-icon-date"></i> {{text.Seconds.name}}</span>
@@ -359,7 +359,7 @@
     },
     computed: {
         text(){
-            return Language[this.i18n||'cn']
+            return Language['zh_TW'||this.i18n]
         },
         secondsText() {
             let seconds = '';
