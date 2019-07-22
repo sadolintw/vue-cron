@@ -40,14 +40,21 @@
     }
   }
 </style>
+<style scoped>
+  .container-tab >>> .el-tabs__content{
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: 210px;
+  }
+</style>
 <template>
   <div id="changeContab">
     <el-row type="flex" class="row-bg" justify="center" :gutter="10">
-      <el-col :span="6">
+      <el-col :span="12">
         <div class="value">{{this.cron}}</div>
       </el-col>
     </el-row>
-    <el-tabs type="border-card">
+    <el-tabs class="container-tab" type="border-card">
       <el-tab-pane>
         <span slot="label"><i class="el-icon-date"></i> {{text.Seconds.name}}</span>
         <div class="tabBody">
@@ -143,82 +150,84 @@
       </el-tab-pane>
       <el-tab-pane>
         <span slot="label"><i class="el-icon-date"></i> {{text.Day.name}}</span>
-        <div class="tabBody">
-          <el-row>
-            <el-radio v-model="day.cronEvery" label="1">{{text.Day.every}}</el-radio>
-          </el-row>
-          <el-row>
-            <el-radio v-model="day.cronEvery" label="2">{{text.Day.intervalWeek[0]}}
-              <el-input-number size="small" v-model="week.incrementIncrement" :min="1" :max="7"></el-input-number>
-              {{text.Day.intervalWeek[1]}}
-              <el-select size="small" v-model="week.incrementStart">
-                <el-option v-for="val in 7" :key="$index" :label="text.Week[val-1]" :value="val"></el-option>
-              </el-select>
-              {{text.Day.intervalWeek[2]}}
-            </el-radio>
-          </el-row>
-          <el-row>
-            <el-radio v-model="day.cronEvery" label="3">{{text.Day.intervalDay[0]}}
-              <el-input-number size="small" v-model="day.incrementIncrement" :min="1" :max="31"></el-input-number>
-              {{text.Day.intervalDay[1]}}
-              <el-input-number size="small" v-model="day.incrementStart" :min="1" :max="31"></el-input-number>
-              {{text.Day.intervalDay[2]}}
-            </el-radio>
-          </el-row>
-          <el-row>
-            <el-radio class="long" v-model="day.cronEvery" label="4">{{text.Day.specificWeek}}
-              <el-select size="small" multiple v-model="week.specificSpecific">
-                <el-option v-for="val in 7"
-                       :key="$index"
-                       :label="text.Week[val-1]"
-                       :value="['SUN','MON','TUE','WED','THU','FRI','SAT'][val-1]"
-                ></el-option>
-              </el-select>
-            </el-radio>
-          </el-row>
-          <el-row>
-            <el-radio class="long" v-model="day.cronEvery" label="5">{{text.Day.specificDay}}
-              <el-select size="small" multiple v-model="day.specificSpecific">
-                <el-option v-for="val in 31" :key="$index" :value="val">{{val}}</el-option>
-              </el-select>
-            </el-radio>
-          </el-row>
-          <el-row>
-            <el-radio v-model="day.cronEvery" label="6">{{text.Day.lastDay}}</el-radio>
-          </el-row>
-          <el-row>
-            <el-radio v-model="day.cronEvery" label="7">{{text.Day.lastWeekday}}</el-radio>
-          </el-row>
-          <el-row>
-            <el-radio v-model="day.cronEvery" label="8">{{text.Day.lastWeek[0]}}
-              <el-select size="small" v-model="day.cronLastSpecificDomDay">
-                <el-option v-for="val in 7" :key="$index" :label="text.Week[val-1]" :value="val"></el-option>
-              </el-select>
-              {{text.Day.lastWeek[1]||''}}
-            </el-radio>
-          </el-row>
-          <el-row>
-            <el-radio v-model="day.cronEvery" label="9">
-              <el-input-number size="small" v-model="day.cronDaysBeforeEomMinus" :min="1" :max="31"></el-input-number>
-              {{text.Day.beforeEndMonth[0]}}
-            </el-radio>
-          </el-row>
-          <el-row>
-            <el-radio v-model="day.cronEvery" label="10">{{text.Day.nearestWeekday[0]}}
-              <el-input-number size="small" v-model="day.cronDaysNearestWeekday" :min="1" :max="31"></el-input-number>
-              {{text.Day.nearestWeekday[1]}}
-            </el-radio>
-          </el-row>
-          <el-row>
-            <el-radio v-model="day.cronEvery" label="11">{{text.Day.someWeekday[0]}}
-              <el-input-number size="small" v-model="week.cronNthDayNth" :min="1" :max="5"></el-input-number>
-              <el-select size="small" v-model="week.cronNthDayDay">
-                <el-option v-for="val in 7" :key="$index" :label="text.Week[val-1]" :value="val"></el-option>
-              </el-select>
-              {{text.Day.someWeekday[1]}}
-            </el-radio>
-          </el-row>
-        </div>
+        <el-scrollbar>
+          <div class="tabBody">
+            <el-row>
+              <el-radio v-model="day.cronEvery" label="1">{{text.Day.every}}</el-radio>
+            </el-row>
+            <el-row>
+              <el-radio v-model="day.cronEvery" label="2">{{text.Day.intervalWeek[0]}}
+                <el-input-number size="small" v-model="week.incrementIncrement" :min="1" :max="7"></el-input-number>
+                {{text.Day.intervalWeek[1]}}
+                <el-select size="small" v-model="week.incrementStart">
+                  <el-option v-for="val in 7" :key="$index" :label="text.Week[val-1]" :value="val"></el-option>
+                </el-select>
+                {{text.Day.intervalWeek[2]}}
+              </el-radio>
+            </el-row>
+            <el-row>
+              <el-radio v-model="day.cronEvery" label="3">{{text.Day.intervalDay[0]}}
+                <el-input-number size="small" v-model="day.incrementIncrement" :min="1" :max="31"></el-input-number>
+                {{text.Day.intervalDay[1]}}
+                <el-input-number size="small" v-model="day.incrementStart" :min="1" :max="31"></el-input-number>
+                {{text.Day.intervalDay[2]}}
+              </el-radio>
+            </el-row>
+            <el-row>
+              <el-radio class="long" v-model="day.cronEvery" label="4">{{text.Day.specificWeek}}
+                <el-select size="small" multiple v-model="week.specificSpecific">
+                  <el-option v-for="val in 7"
+                        :key="$index"
+                        :label="text.Week[val-1]"
+                        :value="['SUN','MON','TUE','WED','THU','FRI','SAT'][val-1]"
+                  ></el-option>
+                </el-select>
+              </el-radio>
+            </el-row>
+            <el-row>
+              <el-radio class="long" v-model="day.cronEvery" label="5">{{text.Day.specificDay}}
+                <el-select size="small" multiple v-model="day.specificSpecific">
+                  <el-option v-for="val in 31" :key="$index" :value="val">{{val}}</el-option>
+                </el-select>
+              </el-radio>
+            </el-row>
+            <el-row>
+              <el-radio v-model="day.cronEvery" label="6">{{text.Day.lastDay}}</el-radio>
+            </el-row>
+            <el-row>
+              <el-radio v-model="day.cronEvery" label="7">{{text.Day.lastWeekday}}</el-radio>
+            </el-row>
+            <el-row>
+              <el-radio v-model="day.cronEvery" label="8">{{text.Day.lastWeek[0]}}
+                <el-select size="small" v-model="day.cronLastSpecificDomDay">
+                  <el-option v-for="val in 7" :key="$index" :label="text.Week[val-1]" :value="val"></el-option>
+                </el-select>
+                {{text.Day.lastWeek[1]||''}}
+              </el-radio>
+            </el-row>
+            <el-row>
+              <el-radio v-model="day.cronEvery" label="9">
+                <el-input-number size="small" v-model="day.cronDaysBeforeEomMinus" :min="1" :max="31"></el-input-number>
+                {{text.Day.beforeEndMonth[0]}}
+              </el-radio>
+            </el-row>
+            <el-row>
+              <el-radio v-model="day.cronEvery" label="10">{{text.Day.nearestWeekday[0]}}
+                <el-input-number size="small" v-model="day.cronDaysNearestWeekday" :min="1" :max="31"></el-input-number>
+                {{text.Day.nearestWeekday[1]}}
+              </el-radio>
+            </el-row>
+            <el-row>
+              <el-radio v-model="day.cronEvery" label="11">{{text.Day.someWeekday[0]}}
+                <el-input-number size="small" v-model="week.cronNthDayNth" :min="1" :max="5"></el-input-number>
+                <el-select size="small" v-model="week.cronNthDayDay">
+                  <el-option v-for="val in 7" :key="$index" :label="text.Week[val-1]" :value="val"></el-option>
+                </el-select>
+                {{text.Day.someWeekday[1]}}
+              </el-radio>
+            </el-row>
+          </div>
+        </el-scrollbar>
       </el-tab-pane>
       <el-tab-pane>
         <span slot="label"><i class="el-icon-date"></i> {{text.Month.name}}</span>
