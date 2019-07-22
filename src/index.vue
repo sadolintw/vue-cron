@@ -51,7 +51,7 @@
   <div id="changeContab">
     <el-row type="flex" class="row-bg" justify="center" :gutter="10">
       <el-col :span="12">
-        <div class="value">{{this.cron}}</div>
+        <div class="value">{{cron}}</div>
       </el-col>
     </el-row>
     <el-tabs class="container-tab" type="border-card">
@@ -289,6 +289,7 @@
       </el-tab-pane>
     </el-tabs>
     <div class="bottom">
+      <el-button type="primary" @click="reset">reset</el-button>
       <el-button type="primary" @click="change">{{text.Save}}</el-button>
       <el-button type="primary" @click="close">{{text.Close}}</el-button>
     </div>
@@ -371,11 +372,11 @@
       }
     }
   },
-  watch:{
-    data(){
-      this.rest(this.$data);
-    }
-  },
+  // watch:{
+  //   data(){
+  //     this.rest(this.$data);
+  //   }
+  // },
   computed: {
     text(){
       return Language[this.i18n||'zh_TW']
@@ -568,13 +569,14 @@
       return this.cron;
     },
     change(){
-      this.$emit('change',this.cron);
+      this.$emit('change', this.cron);
       this.close();
     },
     close(){
       this.$emit('close')
     },
     rest(data){
+      console.log('in rest')
       for(let i in data){
         if(data[i] instanceof Object){
           this.rest(data[i])
@@ -585,6 +587,10 @@
           }
         }
       }
+    },
+    reset(){
+      Object.assign(this.$data, this.$options.data())
+      this.$emit('change', this.cron)
     }
   },
   mounted(){
