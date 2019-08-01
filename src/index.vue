@@ -289,6 +289,7 @@
       </el-tab-pane>
     </el-tabs>
     <div class="bottom">
+      <!-- <el-button type="primary" @click="reset">reset</el-button> -->
       <el-button type="primary" @click="change">{{text.Save}}</el-button>
       <el-button type="primary" @click="close">{{text.Close}}</el-button>
     </div>
@@ -678,8 +679,11 @@
     reset(){
       // Object.assign(this.$data, this.$options.data())
       console.log('reset')
-      this.$data = this.getDefaultData()
+      // this.$data = this.getDefaultData()
+      Object.assign(this.$data, this.$options.data.call(this));
+      // Object.assign(this.$data, this.getDefaultData());
       this.$emit('change', this.cron)
+      console.log('reset complete')
     },
   },
   mounted(){
