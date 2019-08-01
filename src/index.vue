@@ -268,28 +268,27 @@
             <el-radio v-model="year.cronEvery" label="2">{{text.Year.interval[0]}}
               <el-input-number size="small" v-model="year.incrementIncrement" :min="1" :max="99"></el-input-number>
               {{text.Year.interval[1]}}
-              <el-input-number size="small" v-model="year.incrementStart" :min="2018" :max="2118"></el-input-number>
+              <el-input-number size="small" v-model="year.incrementStart" :min="2019" :max="2118"></el-input-number>
             </el-radio>
           </el-row>
           <el-row>
             <el-radio class="long" v-model="year.cronEvery" label="3">{{text.Year.specific}}
               <el-select size="small" filterable multiple v-model="year.specificSpecific">
-                <el-option v-for="val in 100" :key="$index" :label="2017+val" :value="2017+val"></el-option>
+                <el-option v-for="val in 100" :key="$index" :label="2018+val" :value="2018+val"></el-option>
               </el-select>
             </el-radio>
           </el-row>
           <el-row>
             <el-radio v-model="year.cronEvery" label="4">{{text.Year.cycle[0]}}
-              <el-input-number size="small" v-model="year.rangeStart"  :min="2018" :max="2118"></el-input-number>
+              <el-input-number size="small" v-model="year.rangeStart"  :min="2019" :max="2118"></el-input-number>
               {{text.Year.cycle[1]}}
-              <el-input-number size="small" v-model="year.rangeEnd"  :min="2018" :max="2118"></el-input-number>
+              <el-input-number size="small" v-model="year.rangeEnd"  :min="2019" :max="2118"></el-input-number>
             </el-radio>
           </el-row>
         </div>
       </el-tab-pane>
     </el-tabs>
     <div class="bottom">
-      <el-button type="primary" @click="reset">reset</el-button>
       <el-button type="primary" @click="change">{{text.Save}}</el-button>
       <el-button type="primary" @click="close">{{text.Close}}</el-button>
     </div>
@@ -302,6 +301,7 @@
   props:['data','i18n'],
   data(){
     return {
+      showLog: false,
       second:{
         cronEvery:'',
         incrementStart:'3',
@@ -355,7 +355,7 @@
       },
       year:{
         cronEvery:'',
-        incrementStart:'2017',
+        incrementStart:'2019',
         incrementIncrement:'1',
         rangeStart:'',
         rangeEnd:'',
@@ -379,9 +379,15 @@
   // },
   computed: {
     text(){
+      log('in text')
       return Language[this.i18n||'zh_TW']
     },
+    log(val){
+      if(this.showLog)
+        log(val)
+    },
     secondsText() {
+      log('in second')
       let seconds = '';
       let cronEvery=this.second.cronEvery;
       switch (cronEvery.toString()){
@@ -404,6 +410,7 @@
       return seconds;
     },
     minutesText() {
+      log('in minute')
       let minutes = '';
       let cronEvery=this.minute.cronEvery;
       switch (cronEvery.toString()){
@@ -426,6 +433,7 @@
       return minutes;
     },
     hoursText() {
+      log('in hour')
       let hours = '';
       let cronEvery=this.hour.cronEvery;
       switch (cronEvery.toString()){
@@ -448,6 +456,7 @@
       return hours;
     },
     daysText() {
+      log('in day')
       let days='';
       let cronEvery=this.day.cronEvery;
       switch (cronEvery.toString()){
@@ -486,6 +495,7 @@
       return days;
     },
     weeksText() {
+      log('in week')
       let weeks = '';
       let cronEvery=this.day.cronEvery;
       switch (cronEvery.toString()){
@@ -517,6 +527,7 @@
       return weeks;
     },
     monthsText() {
+      log('in month')
       let months = '';
       let cronEvery=this.month.cronEvery;
       switch (cronEvery.toString()){
@@ -539,6 +550,7 @@
       return months;
     },
     yearsText() {
+      log('in year')
       let years = '';
       let cronEvery=this.year.cronEvery;
       switch (cronEvery.toString()){
@@ -576,7 +588,7 @@
       this.$emit('close')
     },
     rest(data){
-      console.log('in rest')
+      log('in rest')
       for(let i in data){
         if(data[i] instanceof Object){
           this.rest(data[i])
@@ -588,10 +600,84 @@
         }
       }
     },
+    getDefaultData() {
+      return {
+        showLog: false,
+        second:{
+          cronEvery:'',
+          incrementStart:'3',
+          incrementIncrement:'5',
+          rangeStart:'',
+          rangeEnd:'',
+          specificSpecific:[],
+        },
+        minute:{
+          cronEvery:'',
+          incrementStart:'3',
+          incrementIncrement:'5',
+          rangeStart:'',
+          rangeEnd:'',
+          specificSpecific:[],
+        },
+        hour:{
+          cronEvery:'',
+          incrementStart:'3',
+          incrementIncrement:'5',
+          rangeStart:'',
+          rangeEnd:'',
+          specificSpecific:[],
+        },
+        day:{
+          cronEvery:'',
+          incrementStart:'1',
+          incrementIncrement:'1',
+          rangeStart:'',
+          rangeEnd:'',
+          specificSpecific:[],
+          cronLastSpecificDomDay:1,
+          cronDaysBeforeEomMinus:'',
+          cronDaysNearestWeekday:'',
+        },
+        week:{
+          cronEvery:'',
+          incrementStart:'1',
+          incrementIncrement:'1',
+          specificSpecific:[],
+          cronNthDayDay:1,
+          cronNthDayNth:'1',
+        },
+        month:{
+          cronEvery:'',
+          incrementStart:'3',
+          incrementIncrement:'5',
+          rangeStart:'',
+          rangeEnd:'',
+          specificSpecific:[],
+        },
+        year:{
+          cronEvery:'',
+          incrementStart:'2019',
+          incrementIncrement:'1',
+          rangeStart:'',
+          rangeEnd:'',
+          specificSpecific:[],
+        },
+        output:{
+          second:'',
+          minute:'',
+          hour:'',
+          day:'',
+          month:'',
+          Week:'',
+          year:'',
+        }
+      }
+    },
     reset(){
-      Object.assign(this.$data, this.$options.data())
+      // Object.assign(this.$data, this.$options.data())
+      this.$data = getDefaultData()
       this.$emit('change', this.cron)
-    }
+    },
   },
   mounted(){
   }
