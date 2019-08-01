@@ -377,17 +377,19 @@
   //     this.rest(this.$data);
   //   }
   // },
-  computed: {
-    text(){
-      log('in text')
-      return Language[this.i18n||'zh_TW']
-    },
+  methods: {
     log(val){
       if(this.showLog)
-        log(val)
+        console.log(val)
+    },
+  },
+  computed: {
+    text(){
+      //this.log('in text')
+      return Language[this.i18n||'zh_TW']
     },
     secondsText() {
-      log('in second')
+      //this.log('in second')
       let seconds = '';
       let cronEvery=this.second.cronEvery;
       switch (cronEvery.toString()){
@@ -410,7 +412,7 @@
       return seconds;
     },
     minutesText() {
-      log('in minute')
+      //this.log('in minute')
       let minutes = '';
       let cronEvery=this.minute.cronEvery;
       switch (cronEvery.toString()){
@@ -433,7 +435,7 @@
       return minutes;
     },
     hoursText() {
-      log('in hour')
+      //this.log('in hour')
       let hours = '';
       let cronEvery=this.hour.cronEvery;
       switch (cronEvery.toString()){
@@ -456,7 +458,7 @@
       return hours;
     },
     daysText() {
-      log('in day')
+      //this.log('in day')
       let days='';
       let cronEvery=this.day.cronEvery;
       switch (cronEvery.toString()){
@@ -495,7 +497,7 @@
       return days;
     },
     weeksText() {
-      log('in week')
+      //this.log('in week')
       let weeks = '';
       let cronEvery=this.day.cronEvery;
       switch (cronEvery.toString()){
@@ -527,7 +529,7 @@
       return weeks;
     },
     monthsText() {
-      log('in month')
+      //this.log('in month')
       let months = '';
       let cronEvery=this.month.cronEvery;
       switch (cronEvery.toString()){
@@ -550,7 +552,7 @@
       return months;
     },
     yearsText() {
-      log('in year')
+      //this.log('in year')
       let years = '';
       let cronEvery=this.year.cronEvery;
       switch (cronEvery.toString()){
@@ -588,7 +590,7 @@
       this.$emit('close')
     },
     rest(data){
-      log('in rest')
+      this.log('in rest')
       for(let i in data){
         if(data[i] instanceof Object){
           this.rest(data[i])
@@ -675,6 +677,7 @@
     },
     reset(){
       // Object.assign(this.$data, this.$options.data())
+      console.log('reset')
       this.$data = getDefaultData()
       this.$emit('change', this.cron)
     },
