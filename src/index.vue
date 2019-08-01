@@ -678,7 +678,7 @@
     reset(){
       // Object.assign(this.$data, this.$options.data())
       console.log('reset')
-      this.$data = getDefaultData()
+      this.$data = this.getDefaultData()
       this.$emit('change', this.cron)
     },
   },
