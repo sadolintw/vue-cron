@@ -11,8 +11,9 @@ Vue.config.devtools = !isProd;
 Vue.config.silent = isProd;
 Vue.config.productionTip = false;
 
-const app = new Vue({
+var app = new Vue({
     el: '#app',
     template: '<test/>',
     components: { Test }
 });
+window.vm = app

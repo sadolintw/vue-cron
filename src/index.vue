@@ -299,7 +299,7 @@
   import Language from '../language/index'
   export default {
   name:'vueCron',
-  props:['data','i18n'],
+  props:['data', 'i18n', 'showLog'],
   data(){
     return {
       showLog: false,
@@ -380,8 +380,9 @@
   // },
   methods: {
     log(val){
-      if(this.showLog)
+      if(this.showLog){
         console.log(val)
+      }
     },
   },
   computed: {
@@ -677,15 +678,24 @@
       }
     },
     reset(){
-      // Object.assign(this.$data, this.$options.data())
-      console.log('reset')
-      // this.$data = this.getDefaultData()
-      Object.assign(this.$data, this.$options.data.call(this));
-      // Object.assign(this.$data, this.getDefaultData());
-      this.$emit('change', this.cron)
-      console.log('reset complete')
+      console.log('reset croneditor')
+
+      setTimeout(() => {
+        resetData(this, this.$data, this.$options.data.call(this))
+      }, 200)
+
+      // Object.assign(this, this.$data, this.$options.data.call(this))
+      // this.$emit('change', this.cron)
+      console.log('reset croneditor complete')
     },
   },
   mounted(){
+
   }
-}</script>
+}
+async function resetData(target, current, original){
+  console.log('reset data', target, current, original)
+  Object.assign(current, original)
+  target.$emit('change', target.cron)
+}
+</script>

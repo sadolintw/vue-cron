@@ -4,7 +4,7 @@ export let cron=vueCron;
 
 export default {
     install(Vue){
-        Vue.component(vueCron.name,vueCron)
+        Vue.component(vueCron.name, vueCron)
     }
 }
 
