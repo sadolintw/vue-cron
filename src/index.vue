@@ -356,7 +356,7 @@
       },
       year:{
         cronEvery:'',
-        incrementStart:'2019',
+        incrementStart:'2020',
         incrementIncrement:'1',
         rangeStart:'',
         rangeEnd:'',
@@ -604,87 +604,77 @@
         }
       }
     },
-    getDefaultData() {
-      return {
-        showLog: false,
-        second:{
-          cronEvery:'',
-          incrementStart:'3',
-          incrementIncrement:'5',
-          rangeStart:'',
-          rangeEnd:'',
-          specificSpecific:[],
-        },
-        minute:{
-          cronEvery:'',
-          incrementStart:'3',
-          incrementIncrement:'5',
-          rangeStart:'',
-          rangeEnd:'',
-          specificSpecific:[],
-        },
-        hour:{
-          cronEvery:'',
-          incrementStart:'3',
-          incrementIncrement:'5',
-          rangeStart:'',
-          rangeEnd:'',
-          specificSpecific:[],
-        },
-        day:{
-          cronEvery:'',
-          incrementStart:'1',
-          incrementIncrement:'1',
-          rangeStart:'',
-          rangeEnd:'',
-          specificSpecific:[],
-          cronLastSpecificDomDay:1,
-          cronDaysBeforeEomMinus:'',
-          cronDaysNearestWeekday:'',
-        },
-        week:{
-          cronEvery:'',
-          incrementStart:'1',
-          incrementIncrement:'1',
-          specificSpecific:[],
-          cronNthDayDay:1,
-          cronNthDayNth:'1',
-        },
-        month:{
-          cronEvery:'',
-          incrementStart:'3',
-          incrementIncrement:'5',
-          rangeStart:'',
-          rangeEnd:'',
-          specificSpecific:[],
-        },
-        year:{
-          cronEvery:'',
-          incrementStart:'2019',
-          incrementIncrement:'1',
-          rangeStart:'',
-          rangeEnd:'',
-          specificSpecific:[],
-        },
-        output:{
-          second:'',
-          minute:'',
-          hour:'',
-          day:'',
-          month:'',
-          Week:'',
-          year:'',
-        }
-      }
+    setDefaultData() {
+      this.second.cronEvery = ''
+      this.second.incrementStart = '3'
+      this.second.incrementIncrement = '5'
+      this.second.rangeStart = ''
+      this.second.rangeEnd = ''
+      this.second.specificSpecific = []
+
+      this.minute.cronEvery = ''
+      this.minute.incrementStart = '3'
+      this.minute.incrementIncrement = '5'
+      this.minute.rangeStart = ''
+      this.minute.rangeEnd = ''
+      this.minute.specificSpecific = []
+
+      this.hour.cronEvery = ''
+      this.hour.incrementStart = '3'
+      this.hour.incrementIncrement = '5'
+      this.hour.rangeStart = ''
+      this.hour.rangeEnd = ''
+      this.hour.specificSpecific = []
+
+      this.day.cronEvery = ''
+      this.day.incrementStart = '1'
+      this.day.incrementIncrement = '1'
+      this.day.rangeStart = ''
+      this.day.rangeEnd = ''
+      this.day.specificSpecific = []
+      this.day.cronLastSpecificDomDay = 1
+      this.day.cronDaysBeforeEomMinus = ''
+      this.day.cronDaysNearestWeekday = ''
+
+      this.week.cronEvery = ''
+      this.week.incrementStart = '1'
+      this.week.incrementIncrement = '1'
+      this.week.cronNthDayDay = 1
+      this.week.cronNthDayNth = '1'
+      this.week.specificSpecific = []
+
+      this.month.cronEvery = ''
+      this.month.incrementStart = '3'
+      this.month.incrementIncrement = '5'
+      this.month.rangeStart = ''
+      this.month.rangeEnd = ''
+      this.month.specificSpecific = []
+
+      this.year.cronEvery = ''
+      this.year.incrementStart = '2020'
+      this.year.incrementIncrement = '1'
+      this.year.rangeStart = ''
+      this.year.rangeEnd = ''
+      this.year.specificSpecific = []
+
+      this.output.second = ''
+      this.output.minute = ''
+      this.output.hour = ''
+      this.output.day = ''
+      this.output.month = ''
+      this.output.Week = ''
+      this.output.year = ''
     },
     reset(){
       console.log('reset croneditor')
 
-      setTimeout(() => {
-        resetData(this, this.$data, this.$options.data.call(this))
-      }, 300)
+      // setTimeout(() => {
+      //   resetData(this, this.$data, this.$options.data.call(this))
+      // }, 300)
 
-      // Object.assign(this, this.$data, this.$options.data.call(this))
+      // this.setDefaultData()
+
+      Object.assign(this, this.$data, this.$options.data.call(this))
       // this.$emit('change', this.cron)
       console.log('reset croneditor complete')
     },
