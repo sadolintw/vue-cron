@@ -682,7 +682,7 @@
 
       setTimeout(() => {
         resetData(this, this.$data, this.$options.data.call(this))
-      }, 200)
+      }, 1000)
 
       // Object.assign(this, this.$data, this.$options.data.call(this))
       // this.$emit('change', this.cron)
