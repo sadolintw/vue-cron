@@ -299,7 +299,7 @@
   import Language from '../language/index'
   export default {
   name:'vueCron',
-  props:['data', 'i18n', 'showLog'],
+  props:['data', 'i18n'],
   data(){
     return {
       showLog: false,
